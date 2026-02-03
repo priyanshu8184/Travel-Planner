@@ -1,0 +1,272 @@
+{
+  "name": "Travel Planner",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4d53439d-97a4-45ea-be16-8194ce7a957b",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        -144
+      ],
+      "id": "dfd44bf5-7e09-418b-8680-6ac8a28b9ec4",
+      "name": "Webhook",
+      "webhookId": "4d53439d-97a4-45ea-be16-8194ce7a957b"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Xqrc35j1_XSQrVtljx3hXO-zjEdKX3_vl5rTSRarC8E",
+          "mode": "list",
+          "cachedResultName": "travel planner",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Xqrc35j1_XSQrVtljx3hXO-zjEdKX3_vl5rTSRarC8E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Xqrc35j1_XSQrVtljx3hXO-zjEdKX3_vl5rTSRarC8E/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Destination / Location": "={{ $json.body.destination }}",
+            "No. Of Days": "={{ $json.body.days }}",
+            "Budget": "={{ $json.body.budget }}",
+            "Mode of Travel": "={{ $json.body.travelMode }}",
+            "Number of travellers": "={{ $json.body.travelers }}",
+            "Email Address": "={{ $json.body.email }}",
+            "Additional Preferences(Optional)": "={{ $json.body.preferences }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Destination / Location",
+              "displayName": "Destination / Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. Of Days",
+              "displayName": "No. Of Days",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mode of Travel",
+              "displayName": "Mode of Travel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Number of travellers",
+              "displayName": "Number of travellers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Additional Preferences(Optional)",
+              "displayName": "Additional Preferences(Optional)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -176,
+        -144
+      ],
+      "id": "cedb94ee-6fd5-493d-9963-adb96929a257",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L5Og0tyEnlC1nA7P",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Please plan good travel options based on the given details:\n\"Destination/Location\": \n {{ $json[\"Destination / Location\"] }}\n\"No. of Days\":{{ $json['No. Of Days'] }}\n\"Budget\":{{ $json.Budget }}\n\"Mode of Travel\": {{ $json['Mode of Travel'] }}\n\"Number of travellers\": {{ $json['Number of travellers'] }}\n\"Email Address\": {{ $json['Email Address'] }}\n\"Additional Preferences\": {{ $json['Additional Preferences(Optional)'] }}\n"
+            },
+            {
+              "role": "system",
+              "content": "=Act like a professional travel planner and give me a day-wise travel plan for me. \nafter analysing the given details.\nRules:\n- The output format should be like, \nRecommended Places to visit\nRecommended Price\nIn Bullet points\nCrisp, Short, Clear and Easy to read, the plan\n\n"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        32,
+        -144
+      ],
+      "id": "29a10d0c-b94b-4a42-b961-ac99905502e0",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "zbIipdt04j2LVEZK",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "priyanshu2670@gmail.com",
+        "subject": "Best Travel Plan",
+        "emailType": "text",
+        "message": "=Hi, \nHere is your planned travel trip.\n{{ $json.output[0].content[0].text }}\n\nRegards.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        384,
+        -144
+      ],
+      "id": "7c0788c2-e3cc-4dc3-a872-39cbd4c46633",
+      "name": "Send a message",
+      "webhookId": "0d0f63d1-1f4b-4c4d-af02-a605d5d04a3f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FBCNApOGD9TdSJyI",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Message a model').item.json.output[0].content[0].text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        592,
+        -144
+      ],
+      "id": "75db1ff8-dc6b-47ff-983f-a5bd3bdf397d",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "50e99381-6125-4c57-9c99-1cdb2008070b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "96fb7e47ee24728f9c4613b534505287b756039faab3197c6bb3245010c04d5f"
+  },
+  "id": "6-rifRxLi4iPZbzPRvep1",
+  "tags": []
+}

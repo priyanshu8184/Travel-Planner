@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1> ✈️ Vishal "Your Perfect Travel Planner" </h1>
+        <p class="tagline">
+          "Plan your dream vacation with ease" 🚀
+        </p>
+      </header>
+
+      <main>
+        <form id="itinerary-form" novalidate>
+          <section class="form-section">
+            <h2>Trip Details</h2>
+
+            <div class="form-group">
+              <label for="destination"
+                >Destination / Location <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="destination"
+                name="destination"
+                placeholder="e.g. Ujjain, Madhya Pradesh"
+                required
+                autocomplete="off"
+              />
+              <span
+                class="error-msg"
+                id="destination-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="days"
+                  >Number of Days <span class="required">*</span></label
+                >
+                <input
+                  type="number"
+                  id="days"
+                  name="days"
+                  min="1"
+                  max="90"
+                  placeholder="e.g. 5"
+                  required
+                />
+                <span
+                  class="error-msg"
+                  id="days-error"
+                  aria-live="polite"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label for="travelers"
+                  >Number of Travellers <span class="required">*</span></label
+                >
+                <input
+                  type="number"
+                  id="travelers"
+                  name="travelers"
+                  min="1"
+                  max="50"
+                  placeholder="e.g. 1"
+                  required
+                />
+                <span
+                  class="error-msg"
+                  id="travelers-error"
+                  aria-live="polite"
+                ></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="budget"
+                >Budget (total for trip) <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="budget"
+                name="budget"
+                placeholder="e.g. 50000 INR"
+                required
+              />
+              <span
+                class="error-msg"
+                id="budget-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-group">
+              <label for="mode"
+                >Mode of Travel <span class="required">*</span></label
+              >
+              <select id="mode" name="mode" required>
+                <option value="">Select mode</option>
+                <option value="bus">Bus</option>
+                <option value="train">Train</option>
+                <option value="flight">Flight</option>
+                <option value="car">Car</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="error-msg" id="mode-error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email"
+                >Email Address <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+              <span
+                class="error-msg"
+                id="email-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-group">
+              <label for="preferences"
+                >Additional Preferences
+                <span class="optional">(optional)</span></label
+              >
+              <textarea
+                id="preferences"
+                name="preferences"
+                rows="4"
+                placeholder="e.g. Prefer Veg/Non-Veg food, interested in museums, Rock climbing, Snowboarding,River rafting, need wheelchair access..."
+              ></textarea>
+            </div>
+          </section>
+
+          <div class="form-actions">
+            <button type="submit" id="submit-btn">Generate Itinerary</button>
+            <button type="reset" id="reset-btn">Reset</button>
+          </div>
+        </form>
+
+        <div
+          id="feedback"
+          class="feedback hidden"
+          role="alert"
+          aria-live="assertive"
+        >
+          <div class="feedback-content">
+            <span class="feedback-icon"></span>
+            <p class="feedback-message"></p>
+          </div>
+        </div>
+      </main>
+
+
+
+
+      <footer>
+        <p>
+          Vishal "Your Perfect Travel Planner" © 2026 All Rights Reserved.
+        </p>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
