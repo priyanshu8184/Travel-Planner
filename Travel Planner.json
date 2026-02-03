@@ -171,7 +171,7 @@
     },
     {
       "parameters": {
-        "sendTo": "priyanshu2670@gmail.com",
+        "sendTo": "={{ $('Append row in sheet').item.json['Email Address'] }}",
         "subject": "Best Travel Plan",
         "emailType": "text",
         "message": "=Hi, \nHere is your planned travel trip.\n{{ $json.output[0].content[0].text }}\n\nRegards.",
@@ -262,7 +262,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "50e99381-6125-4c57-9c99-1cdb2008070b",
+  "versionId": "e5a1a009-8dd7-4557-bcf1-28bac4254a93",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "96fb7e47ee24728f9c4613b534505287b756039faab3197c6bb3245010c04d5f"
